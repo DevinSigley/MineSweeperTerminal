@@ -3,6 +3,7 @@
 
 class GameBoard{
 private:
+	const int BOMB = 1;
 	int size;
 	int** board;
 	
@@ -13,5 +14,6 @@ public:
 	int setCell(int x, int y, int value);
 	void printBoard();
 	void initializeBoard(int default);
+	int checkSurrounding(int x, int y);
 };
 #endif
