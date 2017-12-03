@@ -4,10 +4,6 @@
 
 using namespace std;
 
-const int DIFF_EASY = 2;
-const int DIFF_MEDIUM = 4;
-const int DIFF_HARD = 6;
-
 int main() {
 	int difficulty, boardSize;
 	Menus menus;
@@ -15,8 +11,12 @@ int main() {
 	boardSize = menus.intQuery("Choose a board size between 4 and 10: ", 4, 10);
 	GameBoard bombBoard(boardSize), shownBoard(boardSize);
 
+	bombBoard.generateBombs(difficulty * 2);
+
 	shownBoard.initializeBoard(0);
-	shownBoard.printBoard();
+	shownBoard.bombBoard();
+
+	cout << menus.pickSpace(shownBoard, bombBoard) << endl;
 
 	cin >> boardSize;
 	return 0;

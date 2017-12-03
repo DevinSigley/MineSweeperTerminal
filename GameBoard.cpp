@@ -1,5 +1,7 @@
 #include "GameBoard.h"
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 
 GameBoard::GameBoard(int s) : size(s) {
 	board = new int*[size];
@@ -52,6 +54,21 @@ void GameBoard::initializeBoard(int default) {
 		}
 	}
 }
+
+void GameBoard::generateBombs(int difficulty) {
+	srand(time(NULL));
+	for (int i = 0; i < size; i++) {
+		for (int j = 0; j < size; j++) {
+			if (rand() % 11 <= difficulty) {
+				board[i][j] = 1;
+			}
+			else {
+				board[i][j] = 0;
+			}
+		}
+	}
+}
+
 
 // Checks how many bombs are nearby; returns it as an int. Returns -1 if selected is bomb.
 int GameBoard::checkSurrounding(int x, int y) {

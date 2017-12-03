@@ -14,6 +14,7 @@ public:
 	int setCell(int x, int y, int value);
 	void printBoard();
 	void initializeBoard(int default);
+	void generateBombs(int difficulty);
 	int checkSurrounding(int x, int y);
 };
 #endif
