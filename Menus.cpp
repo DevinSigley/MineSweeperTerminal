@@ -22,25 +22,85 @@ int Menus::intQuery(std::string prompt, int lowerBound, int upperBound) {
 
 // TODO: Picking spaces 
 int Menus::pickSpace(GameBoard& shownBoard, GameBoard& bombBoard) {
-	int x = 0, y = 0;
-	std::string input;
+	char input = ' ';
+	int x = -1, y = -1;
+	int boardSize = shownBoard.getSize();
+
+	shownBoard.printBoard();
+	std::cout << "Select a location by entering the corresponding coordinate.\n";
+
+	// Get Row choice
 	do {
-		shownBoard.printBoard();
-		std::cout << "Select a location by inputting a row then a column on the same line: ";
-		
+		std::cout << "Column (from A to " << static_cast<char>(boardSize + 65) << "): ";
 		std::cin >> input;
-		for (unsigned int i = 0; i < input.length() - 1 || y == 0; i++) {
-			if (isalpha(static_cast<int>(input[i]))) {
-				if (x == 0) {
-					x = static_cast<int>(input[i]);
-				}
-				else {
-					y = static_cast<int>(input[i]);
-				}
+
+		// checking lowercase input
+		if (input >= 97 && input <= 122) {
+			// check if selected letter is on board
+			if (input - 31 > boardSize + 65) {
+				std::cout << "The coordinate chosen is too high.\n";
+			}
+			else {
+				y = input - 97;
 			}
 		}
+		// checking uppercase input
+		else if (input >= 65 && input <= 90) {
+			// check if selected letter is on board
+			if (input > boardSize + 65) {
+				std::cout << "The coordinate chosen is too high.\n";
+			}
+			else {
+				y = input - 65;
+			}
+		}
+		else {
+			std::cout << "Please enter an alphanumeric character.\n";
+		}
+	} while (y == -1);
 
-	} while (x == 0 && y == 0);
-	return x;
-	// TODO: Check if space has been picked before
+	// Get Column choice
+	do {
+		std::cout << "Row (from A to " << static_cast<char>(boardSize + 65) << "): ";
+		std::cin >> input;
+
+		// checking lowercase input
+		if (input >= 97 && input <= 122){
+			// check if selected letter is on board
+			if (input - 31 > boardSize + 65) {
+				std::cout << "The coordinate chosen is too high.\n";
+			}
+			else {
+				x = input - 97;
+			}
+		}
+		// checking uppercase input
+		else if (input >= 65 && input <= 90) {
+			// check if selected letter is on board
+			if (input > boardSize + 65) {
+				std::cout << "The coordinate chosen is too high.\n";
+			}
+			else {
+				x = input - 65;
+			}
+		}
+		else {
+			std::cout << "Please enter an alphanumeric character.\n";
+		}
+
+	} while (x == -1);
+
+	std::cout << "x and y:" << x << " " << y << std::endl;
+	int bombsNear = bombBoard.checkSurrounding(x, y);
+	std::cout << "Current bombs near: " << bombsNear << std::endl;
+	
+	// If user selected a bomb, return -1
+	if (bombsNear == -1) {
+		shownBoard.setCell(x, y, 9);
+		return -1;
+	}
+	else {
+		shownBoard.setCell(x, y, bombsNear);
+		return bombsNear;
+	}
 }

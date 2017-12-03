@@ -11,7 +11,8 @@ public:
 	GameBoard(int s);
 	~GameBoard();
 	int getCell(int x, int y);
-	int setCell(int x, int y, int value);
+	void setCell(int x, int y, int value);
+	int getSize();
 	void printBoard();
 	void initializeBoard(int default);
 	void generateBombs(int difficulty);

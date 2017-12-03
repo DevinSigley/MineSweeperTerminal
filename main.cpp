@@ -14,9 +14,10 @@ int main() {
 	bombBoard.generateBombs(difficulty * 2);
 
 	shownBoard.initializeBoard(0);
-	shownBoard.bombBoard();
-
-	cout << menus.pickSpace(shownBoard, bombBoard) << endl;
+	for (int i = 0; i < 5; i++) {
+		menus.pickSpace(shownBoard, bombBoard);
+	}
+	shownBoard.printBoard();
 
 	cin >> boardSize;
 	return 0;

@@ -22,11 +22,13 @@ int GameBoard::getCell(int x, int y) {
 	return board[x][y];
 }
 
-int GameBoard::setCell(int x, int y, int value) {
-	std::cout << "board at " << x << y << "is " << board[x][y] << std::endl;
+void GameBoard::setCell(int x, int y, int value) {
 	board[x][y] = value;
 	std::cout << "now board is " << board[x][y] << std::endl;
-	return 1;
+}
+
+int GameBoard::getSize() {
+	return size;
 }
 
 // Print board with alphabetic legend
@@ -75,7 +77,7 @@ int GameBoard::checkSurrounding(int x, int y) {
 	int bombSum = 0;
 
 	// Return -1 if selected space is a bomb.
-	if (board[x][y] == BOMB) {
+	if (this->getCell(x, y) == BOMB) {
 		return -1;
 	}
 
@@ -166,7 +168,7 @@ int GameBoard::checkSurrounding(int x, int y) {
 	}
 
 	// Checking top
-	if (y == 0) {
+	else if (y == 0) {
 		// Top corners already checked by preceding x checks, so excluded.
 		if (board[x - 1][y] == BOMB) {
 			bombSum++;
@@ -204,31 +206,29 @@ int GameBoard::checkSurrounding(int x, int y) {
 		}
 	}
 	
-	// Checking space not on edge of board
-	if (board[x - 1][y] == BOMB) {
-		bombSum++;
+	// Checking space not on an edge
+	else {
+		if (board[x + 1][y] == BOMB) {
+			bombSum++;
+		}
+		if (board[x][y - 1] == BOMB) {
+			bombSum++;
+		}
+		if (board[x][y + 1] == BOMB) {
+			bombSum++;
+		}
+		if (board[x - 1][y - 1] == BOMB) {
+			bombSum++;
+		}
+		if (board[x - 1][y + 1] == BOMB) {
+			bombSum++;
+		}
+		if (board[x + 1][y - 1] == BOMB) {
+			bombSum++;
+		}
+		if (board[x + 1][y + 1] == BOMB) {
+			bombSum++;
+		}
 	}
-	if (board[x + 1][y] == BOMB) {
-		bombSum++;
-	}
-	if (board[x][y - 1] == BOMB) {
-		bombSum++;
-	}
-	if (board[x][y + 1] == BOMB) {
-		bombSum++;
-	}
-	if (board[x - 1][y - 1] == BOMB) {
-		bombSum++;
-	}
-	if (board[x - 1][y + 1] == BOMB) {
-		bombSum++;
-	}
-	if (board[x + 1][y - 1] == BOMB) {
-		bombSum++;
-	}
-	if (board[x + 1][y + 1] == BOMB) {
-		bombSum++;
-	}
-
 	return bombSum;
 }
