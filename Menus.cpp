@@ -16,9 +16,28 @@ int Menus::intQuery(std::string prompt, int lowerBound, int upperBound) {
 	do {
 		std::cout << prompt << std::endl;
 		std::cin >> input;
+		std::cin.clear();
+		std::cin.ignore(1000, '\n');
 	} while (input < lowerBound || input > upperBound);
 	return input;
 }
+
+char Menus::charQuery(std::string prompt) {
+	bool invalidInput = true;
+	char input;
+	do {
+		std::cin >> input;
+		std::cin.clear();
+		std::cin.ignore(1000, '\n');
+		if (input == 'y' || input == 'Y' || input == 'n' || input == 'N') {
+			return input;
+		}
+		else {
+			std::cout << prompt;
+		}
+	} while (invalidInput);
+}
+
 
 int Menus::pickSpace(GameBoard& shownBoard, GameBoard& bombBoard, int turn) {
 	char input = ' ';
@@ -28,10 +47,12 @@ int Menus::pickSpace(GameBoard& shownBoard, GameBoard& bombBoard, int turn) {
 	shownBoard.printBoard();
 	std::cout << "Select a location by entering the corresponding coordinate.\n";
 
-	// Get Row choice
+	// Get Column choice
 	do {
 		std::cout << "Column (from A to " << static_cast<char>(boardSize + 64) << "): ";
 		std::cin >> input;
+		std::cin.clear();
+		std::cin.ignore(1000, '\n');
 
 		// checking lowercase input
 		if (input >= 97 && input <= 122) {
@@ -58,10 +79,12 @@ int Menus::pickSpace(GameBoard& shownBoard, GameBoard& bombBoard, int turn) {
 		}
 	} while (y == -1);
 
-	// Get Column choice
+	// Get Row choice
 	do {
 		std::cout << "Row (from A to " << static_cast<char>(boardSize + 64) << "): ";
 		std::cin >> input;
+		std::cin.clear();
+		std::cin.ignore(1000, '\n');
 
 		// checking lowercase input
 		if (input >= 97 && input <= 122){
