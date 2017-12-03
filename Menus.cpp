@@ -20,7 +20,7 @@ int Menus::intQuery(std::string prompt, int lowerBound, int upperBound) {
 	return input;
 }
 
-int Menus::pickSpace(GameBoard& shownBoard, GameBoard& bombBoard) {
+int Menus::pickSpace(GameBoard& shownBoard, GameBoard& bombBoard, int turn) {
 	char input = ' ';
 	int x = -1, y = -1;
 	int boardSize = shownBoard.getSize();
@@ -91,11 +91,22 @@ int Menus::pickSpace(GameBoard& shownBoard, GameBoard& bombBoard) {
 
 	int bombsNear = bombBoard.checkSurrounding(x, y);
 	
-	// If user selected a bomb, return -1
+	// If user selected a bomb
 	if (bombsNear == -1) {
-		shownBoard.setCell(x, y, 'X');
-		return -1;
+		// If it's the first turn, make that space not a bomb, recalculate bombsNear.
+		if (turn == 0) {
+			bombBoard.setCell(x, y, '0');
+			bombsNear = bombBoard.checkSurrounding(x, y);
+			shownBoard.setCell(x, y, static_cast<char>(bombsNear + 48));
+			return bombsNear;
+		}
+		// If bomb selected after the first turn, return -1
+		else {
+			shownBoard.setCell(x, y, 'X');
+			return -1;
+		}
 	}
+	// User selected a non-bomb space
 	else {
 		shownBoard.setCell(x, y, static_cast<char>(bombsNear + 48));
 		return bombsNear;
