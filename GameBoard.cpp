@@ -24,7 +24,6 @@ char GameBoard::getCell(int x, int y) {
 
 void GameBoard::setCell(int x, int y, char value) {
 	board[x][y] = value;
-	std::cout << "now board is " << board[x][y] << std::endl;
 }
 
 int GameBoard::getSize() {

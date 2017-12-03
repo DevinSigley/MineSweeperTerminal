@@ -20,7 +20,6 @@ int Menus::intQuery(std::string prompt, int lowerBound, int upperBound) {
 	return input;
 }
 
-// TODO: Picking spaces 
 int Menus::pickSpace(GameBoard& shownBoard, GameBoard& bombBoard) {
 	char input = ' ';
 	int x = -1, y = -1;
@@ -90,10 +89,7 @@ int Menus::pickSpace(GameBoard& shownBoard, GameBoard& bombBoard) {
 
 	} while (x == -1);
 
-	std::cout << "x and y:" << x << " " << y << std::endl;
-	std::cout << "board size: " << bombBoard.getSize() << std::endl;
 	int bombsNear = bombBoard.checkSurrounding(x, y);
-	std::cout << "Current bombs near: " << bombsNear << std::endl;
 	
 	// If user selected a bomb, return -1
 	if (bombsNear == -1) {
@@ -119,5 +115,10 @@ int Menus::checkWin(GameBoard& shownBoard, GameBoard& bombBoard) {
 			}
 		}
 	}
-	return 1;
+	if (correctSpaces == emptySpaces) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
 }
