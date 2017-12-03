@@ -125,7 +125,7 @@ int GameBoard::checkSurrounding(int x, int y) {
 	}
 
 	// Checking right side
-	else if (x == size) {
+	else if (x == size - 1) {
 		if (y == 0) {
 			if (board[x][y + 1] == BOMB) {
 				bombSum++;
@@ -188,7 +188,7 @@ int GameBoard::checkSurrounding(int x, int y) {
 	}
 
 	// Checking bottom
-	else if (y == size) {
+	else if (y == size - 1) {
 		if (board[x - 1][y] == BOMB) {
 			bombSum++;
 		}

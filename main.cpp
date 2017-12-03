@@ -12,6 +12,7 @@ int main() {
 	GameBoard bombBoard(boardSize), shownBoard(boardSize);
 
 	bombBoard.generateBombs(difficulty * 2);
+	bombBoard.printBoard();
 
 	shownBoard.initializeBoard(0);
 	for (int i = 0; i < 5; i++) {

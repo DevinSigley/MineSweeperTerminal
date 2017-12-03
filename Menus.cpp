@@ -91,6 +91,7 @@ int Menus::pickSpace(GameBoard& shownBoard, GameBoard& bombBoard) {
 	} while (x == -1);
 
 	std::cout << "x and y:" << x << " " << y << std::endl;
+	std::cout << "board size: " << bombBoard.getSize() << std::endl;
 	int bombsNear = bombBoard.checkSurrounding(x, y);
 	std::cout << "Current bombs near: " << bombsNear << std::endl;
 	
