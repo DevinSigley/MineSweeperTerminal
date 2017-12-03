@@ -9,7 +9,7 @@ int main() {
 	Menus menus;
 	cout << "Welcome to Minesweeper!\n\n";
 	difficulty = menus.intQuery("Choose your difficulty (1-Easy, 2-Medium, 3-Hard): ", 1, 3);
-	boardSize = menus.intQuery("Choose a board size between 4 and 10: ", 4, 10);
+	boardSize = menus.intQuery("Choose a board size between 4 and 10: ", 3, 15);
 	GameBoard bombBoard(boardSize), shownBoard(boardSize);
 
 	bombBoard.generateBombs(difficulty * 2);

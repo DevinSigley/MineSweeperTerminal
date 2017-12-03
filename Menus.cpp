@@ -30,7 +30,7 @@ int Menus::pickSpace(GameBoard& shownBoard, GameBoard& bombBoard, int turn) {
 
 	// Get Row choice
 	do {
-		std::cout << "Column (from A to " << static_cast<char>(boardSize + 65) << "): ";
+		std::cout << "Column (from A to " << static_cast<char>(boardSize + 64) << "): ";
 		std::cin >> input;
 
 		// checking lowercase input
@@ -60,7 +60,7 @@ int Menus::pickSpace(GameBoard& shownBoard, GameBoard& bombBoard, int turn) {
 
 	// Get Column choice
 	do {
-		std::cout << "Row (from A to " << static_cast<char>(boardSize + 65) << "): ";
+		std::cout << "Row (from A to " << static_cast<char>(boardSize + 64) << "): ";
 		std::cin >> input;
 
 		// checking lowercase input
