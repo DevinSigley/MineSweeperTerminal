@@ -5,7 +5,7 @@
 using namespace std;
 
 int main() {
-	int difficulty, boardSize;
+	int difficulty, boardSize, turn = 1;
 	Menus menus;
 	difficulty = menus.intQuery("Choose your difficulty (1-Easy, 2-Medium, 3-Hard): ", 1, 3);
 	boardSize = menus.intQuery("Choose a board size between 4 and 10: ", 4, 10);
@@ -14,7 +14,7 @@ int main() {
 	bombBoard.generateBombs(difficulty * 2);
 	bombBoard.printBoard();
 
-	shownBoard.initializeBoard(0);
+	shownBoard.initializeBoard('?');
 	for (int i = 0; i < 5; i++) {
 		menus.pickSpace(shownBoard, bombBoard);
 	}

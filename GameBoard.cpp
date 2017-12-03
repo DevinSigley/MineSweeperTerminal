@@ -4,9 +4,9 @@
 #include <ctime>
 
 GameBoard::GameBoard(int s) : size(s) {
-	board = new int*[size];
+	board = new char*[size];
 	for (int i = 0; i < size; i++) {
-		board[i] = new int[size];
+		board[i] = new char[size];
 	}
 }
 
@@ -18,11 +18,11 @@ GameBoard::~GameBoard()
 	delete board;
 }
 
-int GameBoard::getCell(int x, int y) {
+char GameBoard::getCell(int x, int y) {
 	return board[x][y];
 }
 
-void GameBoard::setCell(int x, int y, int value) {
+void GameBoard::setCell(int x, int y, char value) {
 	board[x][y] = value;
 	std::cout << "now board is " << board[x][y] << std::endl;
 }
@@ -49,7 +49,7 @@ void GameBoard::printBoard() {
 }
 
 // Set all board positions to argument
-void GameBoard::initializeBoard(int default) {
+void GameBoard::initializeBoard(char default) {
 	for (int i = 0; i < size; i++) {
 		for (int j = 0; j < size; j++) {
 			board[i][j] = default;
@@ -62,10 +62,10 @@ void GameBoard::generateBombs(int difficulty) {
 	for (int i = 0; i < size; i++) {
 		for (int j = 0; j < size; j++) {
 			if (rand() % 11 <= difficulty) {
-				board[i][j] = 1;
+				board[i][j] = '1';
 			}
 			else {
-				board[i][j] = 0;
+				board[i][j] = '0';
 			}
 		}
 	}
@@ -208,6 +208,9 @@ int GameBoard::checkSurrounding(int x, int y) {
 	
 	// Checking space not on an edge
 	else {
+		if (board[x - 1][y] == BOMB) {
+			bombSum++;
+		}
 		if (board[x + 1][y] == BOMB) {
 			bombSum++;
 		}

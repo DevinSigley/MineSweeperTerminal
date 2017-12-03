@@ -97,11 +97,27 @@ int Menus::pickSpace(GameBoard& shownBoard, GameBoard& bombBoard) {
 	
 	// If user selected a bomb, return -1
 	if (bombsNear == -1) {
-		shownBoard.setCell(x, y, 9);
+		shownBoard.setCell(x, y, 'X');
 		return -1;
 	}
 	else {
-		shownBoard.setCell(x, y, bombsNear);
+		shownBoard.setCell(x, y, static_cast<char>(bombsNear + 48));
 		return bombsNear;
 	}
+}
+
+int Menus::checkWin(GameBoard& shownBoard, GameBoard& bombBoard) {
+	int boardSize = shownBoard.getSize();
+	int emptySpaces = 0, correctSpaces = 0;
+	for (int i = 0; i < boardSize; i++) {
+		for (int j = 0; j < boardSize; j++) {
+			if (bombBoard.getCell(i, j) == '0') {
+				emptySpaces++;
+				if (shownBoard.getCell(i, j) != '?') {
+					correctSpaces++;
+				}
+			}
+		}
+	}
+	return 1;
 }

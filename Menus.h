@@ -8,6 +8,7 @@ class Menus
 public:
 	int intQuery(std::string prompt, int lowerBound, int upperBound);
 	int pickSpace(GameBoard& shownBoard, GameBoard& bombBoard);
+	int checkWin(GameBoard& shownBoard, GameBoard& bombBoard);
 	Menus();
 	~Menus();
 };
